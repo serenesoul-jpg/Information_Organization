@@ -1,9 +1,13 @@
-from neo4j import GraphDatabase
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from db import get_driver
 
 LABELS = ["Cipai", "Poet", "Alias", "Work", "Instrument", "CiStyle", "Period", "Context"]
 RELS = ["REPRESENT", "HAS_ALIAS", "WROTE", "USES_CIPAI", "ACCOMPANIED_BY", "BELONGS_TO", "ACTIVE_IN", "RELATED_TO", "MENTIONED_IN"]
 
-d = GraphDatabase.driver("bolt://localhost:7687", auth=("neo4j", "neo4j"))
+d = get_driver()
 with d.session() as s:
     print("=== 宋词节点统计 ===")
     for label in LABELS:
