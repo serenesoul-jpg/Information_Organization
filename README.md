@@ -9,13 +9,15 @@
 
 本系统将宋词领域的结构化数据（词牌 CSV）与非结构化文献（Word 文档）组织为知识图谱，并提供可交互的 Web 探索界面。三层架构各司其职：
 
-| 层次 | 工具 | 职责 |
-|------|------|------|
-| 概念层（T-Box） | Protégé | 类与属性定义、HermiT 推理验证 |
-| 数据层（A-Box） | Neo4j | 批量实例数据、关系网络、Cypher 查询 |
-| 交互层 | Web 全栈应用 | 可视化探索、检索、时间轴过滤 |
 
-**在线演示：** http://8.134.97.118:8083/
+| 层次         | 工具       | 职责                    |
+| ---------- | -------- | --------------------- |
+| 概念层（T-Box） | Protégé  | 类与属性定义、HermiT 推理验证    |
+| 数据层（A-Box） | Neo4j    | 批量实例数据、关系网络、Cypher 查询 |
+| 交互层        | Web 全栈应用 | 可视化探索、检索、时间轴过滤        |
+
+
+**在线演示：** [http://8.134.97.118:8083/](http://8.134.97.118:8083/)
 
 ---
 
@@ -50,6 +52,8 @@ flowchart LR
     API --> WEB
 ```
 
+
+
 ---
 
 ## 功能特性
@@ -68,28 +72,32 @@ flowchart LR
 
 导入完成后预期规模：
 
-| 节点类型 | 数量（约） |
-|----------|-----------|
-| Cipai（词牌） | 30 |
-| Poet（词人） | 20 |
-| Alias（别称） | 33 |
-| Work（作品） | 32 |
-| Instrument（乐器） | 3 |
-| CiStyle（流派） | 3 |
-| Period（朝代） | 4 |
-| Context（文献背景） | 1 |
+
+| 节点类型           | 数量（约） |
+| -------------- | ----- |
+| Cipai（词牌）      | 30    |
+| Poet（词人）       | 20    |
+| Alias（别称）      | 33    |
+| Work（作品）       | 32    |
+| Instrument（乐器） | 3     |
+| CiStyle（流派）    | 3     |
+| Period（朝代）     | 4     |
+| Context（文献背景）  | 1     |
+
 
 ---
 
 ## 技术栈
 
-| 模块 | 技术 |
-|------|------|
-| 本体建模 | Protégé 5.6 + HermiT |
-| 图数据库 | Neo4j 5.15 |
-| 后端 | Python 3.11 + FastAPI + neo4j-driver |
-| 前端 | HTML / CSS / JavaScript + vis-network |
-| 部署 | Docker Compose |
+
+| 模块   | 技术                                    |
+| ---- | ------------------------------------- |
+| 本体建模 | Protégé 5.6 + HermiT                  |
+| 图数据库 | Neo4j 5.15                            |
+| 后端   | Python 3.11 + FastAPI + neo4j-driver  |
+| 前端   | HTML / CSS / JavaScript + vis-network |
+| 部署   | Docker Compose                        |
+
 
 ---
 
@@ -148,10 +156,12 @@ cd Information_Organization
 docker compose up -d
 ```
 
-| 服务 | 地址 | 说明 |
-|------|------|------|
-| Web 应用 | http://localhost:8083 | 知识图谱可视化 |
-| Neo4j Browser | http://localhost:7474 | 图数据库管理界面 |
+
+| 服务            | 地址                                             | 说明       |
+| ------------- | ---------------------------------------------- | -------- |
+| Web 应用        | [http://localhost:8083](http://localhost:8083) | 知识图谱可视化  |
+| Neo4j Browser | [http://localhost:7474](http://localhost:7474) | 图数据库管理界面 |
+
 
 Neo4j 默认账号：`neo4j` / `songci2026`
 
@@ -229,14 +239,16 @@ docker compose build web && docker compose up -d web
 
 基础路径：`/api`
 
-| 接口 | 方法 | 参数 | 说明 |
-|------|------|------|------|
-| `/graph` | GET | `period`, `limit` | 获取图谱数据（可按朝代过滤） |
-| `/search` | GET | `q`, `limit` | 搜索词人/词牌/别称/乐器 |
-| `/node/{id}` | GET | — | 节点详情及关联实体 |
-| `/timeline` | GET | — | 各朝代词人数量统计 |
-| `/context` | GET | — | 文献背景文本 |
-| `/health` | GET | — | 健康检查 |
+
+| 接口           | 方法  | 参数                | 说明             |
+| ------------ | --- | ----------------- | -------------- |
+| `/graph`     | GET | `period`, `limit` | 获取图谱数据（可按朝代过滤） |
+| `/search`    | GET | `q`, `limit`      | 搜索词人/词牌/别称/乐器  |
+| `/node/{id}` | GET | —                 | 节点详情及关联实体      |
+| `/timeline`  | GET | —                 | 各朝代词人数量统计      |
+| `/context`   | GET | —                 | 文献背景文本         |
+| `/health`    | GET | —                 | 健康检查           |
+
 
 **示例：**
 
@@ -270,44 +282,34 @@ curl "http://localhost:8083/api/search?q=苏轼"
 
 ### 节点标签
 
-| 标签 | 含义 | 主要属性 |
-|------|------|----------|
-| `:Poet` | 词人 | name, note |
-| `:Cipai` | 词牌 | name, alias, type, famous_line |
-| `:Alias` | 别称 | name |
-| `:Work` | 作品 | title, famous_line |
-| `:Instrument` | 乐器 | name, description |
-| `:CiStyle` | 流派 | name |
-| `:Period` | 朝代 | name |
-| `:Context` | 文献背景 | title, content |
+
+| 标签            | 含义   | 主要属性                           |
+| ------------- | ---- | ------------------------------ |
+| `:Poet`       | 词人   | name, note                     |
+| `:Cipai`      | 词牌   | name, alias, type, famous_line |
+| `:Alias`      | 别称   | name                           |
+| `:Work`       | 作品   | title, famous_line             |
+| `:Instrument` | 乐器   | name, description              |
+| `:CiStyle`    | 流派   | name                           |
+| `:Period`     | 朝代   | name                           |
+| `:Context`    | 文献背景 | title, content                 |
+
 
 ### 关系类型
 
-| 关系 | 起止 | 含义 |
-|------|------|------|
-| `REPRESENT` | Poet → Cipai | 代表词人 |
-| `HAS_ALIAS` | Cipai → Alias | 词牌别称 |
-| `WROTE` | Poet → Work | 创作作品 |
-| `USES_CIPAI` | Work → Cipai | 作品使用词牌 |
-| `ACCOMPANIED_BY` | Cipai → Instrument | 伴奏乐器 |
-| `BELONGS_TO` | Poet → CiStyle | 所属流派 |
-| `ACTIVE_IN` | Poet → Period | 活跃时期 |
 
-OWL 概念与 Neo4j 标签的对照见 [`ontology/README.md`](ontology/README.md)。
+| 关系               | 起止                 | 含义     |
+| ---------------- | ------------------ | ------ |
+| `REPRESENT`      | Poet → Cipai       | 代表词人   |
+| `HAS_ALIAS`      | Cipai → Alias      | 词牌别称   |
+| `WROTE`          | Poet → Work        | 创作作品   |
+| `USES_CIPAI`     | Work → Cipai       | 作品使用词牌 |
+| `ACCOMPANIED_BY` | Cipai → Instrument | 伴奏乐器   |
+| `BELONGS_TO`     | Poet → CiStyle     | 所属流派   |
+| `ACTIVE_IN`      | Poet → Period      | 活跃时期   |
 
----
 
-## 答辩演示建议
-
-按以下顺序操作 Web 应用（约 3–4 分钟）：
-
-1. 打开首页，介绍整体布局（搜索栏、图谱、时间轴、侧栏）
-2. **搜索「苏轼」** → 图谱聚焦，展示词人关联词牌
-3. **点击「念奴娇」** → 侧栏展示别称、名句、词体类型
-4. **时间轴切换「南宋」** → 展示图谱过滤效果
-5. **点击「笙」** → 展示长调词牌与清雅派词人关联
-6. **点击「文献」按钮** → 朗读背景论述（靖康南渡、笙与慢词融合）
-7. 切换至 Neo4j Browser，执行 `document/Neo4j查询说明.md` 中的 Cypher 演示查询
+OWL 概念与 Neo4j 标签的对照见 `[ontology/README.md](ontology/README.md)`。
 
 ---
 
@@ -334,13 +336,15 @@ docker compose down -v
 
 ## 相关文档
 
-| 文档 | 说明 |
-|------|------|
-| [`document/实现路线文档.md`](document/实现路线文档.md) | 完整开发路线与分工建议 |
-| [`document/Neo4j查询说明.md`](document/Neo4j查询说明.md) | 答辩用 Cypher 查询手册 |
-| [`document/Protege说明.md`](document/Protege说明.md) | 本体建模说明 |
-| [`ontology/README.md`](ontology/README.md) | OWL 与 Neo4j 概念对照 |
-| [`data/README.md`](data/README.md) | 数据字段与清洗规则 |
+
+| 文档                                               | 说明               |
+| ------------------------------------------------ | ---------------- |
+| `[document/实现路线文档.md](document/实现路线文档.md)`       | 完整开发路线与分工建议      |
+| `[document/Neo4j查询说明.md](document/Neo4j查询说明.md)` | Cypher 查询手册      |
+| `[document/Protege说明.md](document/Protege说明.md)` | 本体建模说明           |
+| `[ontology/README.md](ontology/README.md)`       | OWL 与 Neo4j 概念对照 |
+| `[data/README.md](data/README.md)`               | 数据字段与清洗规则        |
+
 
 ---
 
