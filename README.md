@@ -339,7 +339,7 @@ docker compose down -v
 
 | 文档                                               | 说明               |
 | ------------------------------------------------ | ---------------- |
-| `[document/实现路线文档.md](document/实现路线文档.md)`       | 完整开发路线与分工建议      |
+| `[document/实现路线文档.md](document/实现路线文档.md)`       | 完整开发路线           |
 | `[document/Neo4j查询说明.md](document/Neo4j查询说明.md)` | Cypher 查询手册      |
 | `[document/Protege说明.md](document/Protege说明.md)` | 本体建模说明           |
 | `[ontology/README.md](ontology/README.md)`       | OWL 与 Neo4j 概念对照 |
